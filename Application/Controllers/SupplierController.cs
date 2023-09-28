@@ -45,7 +45,7 @@ namespace Domain.Controllers
 
         }
 
-        // GET: SupplierController/Details/5
+        // GET: SupplierController/5
         [HttpGet("{id:int}", Name = "GetSupplierById")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
@@ -67,7 +67,7 @@ namespace Domain.Controllers
             }
         }
 
-        // POST: SupplierController/Create
+        // POST: SupplierController/
         [HttpPost]
         public async Task<IActionResult> PostAsync(SupplierDTO model)
         {
@@ -92,7 +92,7 @@ namespace Domain.Controllers
         }
 
 
-        // POST: SupplierController/Edit/5
+        // Put: SupplierController/
         [HttpPut]
         public async Task<IActionResult> PutAsync(SupplierDTO model)
         {
@@ -115,7 +115,7 @@ namespace Domain.Controllers
             return Ok(model);
         }
 
-        // Get: SupplierController/Delete/5
+        // Delete: SupplierController/5
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {

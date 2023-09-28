@@ -46,7 +46,7 @@ namespace Project.UI.Controllers
 
         }
 
-        // GET: ProductController/Details/5
+        // GET: ProductController/
         [HttpGet("{id:int}", Name = "GetProductById")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
@@ -68,7 +68,7 @@ namespace Project.UI.Controllers
             }
         }
 
-        // POST: ProductController/Create
+        // POST: ProductController/
         [HttpPost]
         public async Task<IActionResult> PostAsync(ProductDTO model)
         {
@@ -76,9 +76,6 @@ namespace Project.UI.Controllers
             {
                 try
                 {
-                    /*if (model.ManufactureDate > model.ExpiryDate)
-                        return BadRequest("A data de fabricação não pode ser maior que a data de expiração");*/
-
                     var product = _mapper.Map<Product>(model);
 
                     var data = await _service.Create(product);
@@ -95,17 +92,14 @@ namespace Project.UI.Controllers
         }
 
 
-        // POST: ProductController/Edit/5
+        // Put: ProductController/
         [HttpPut]
         public async Task<IActionResult> PutAsync(ProductDTO model)
         {
             if (ModelState.IsValid)
             {
                 try
-                {
-                    if (model.ManufactureDate > model.ExpiryDate)
-                        return BadRequest("A data de fabricação não pode ser maior que a data de expiração");
-                    
+                {                   
                     var product = _mapper.Map<Product>(model);
                     await _service.Update(product);
                     return new CreatedAtRouteResult("GetById",
@@ -120,7 +114,7 @@ namespace Project.UI.Controllers
             return Ok(model);
         }
 
-        // Get: ProductController/Delete/5
+        // Delete: ProductController/
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {

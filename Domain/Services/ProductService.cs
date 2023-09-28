@@ -2,7 +2,6 @@
 using Domain.Interfaces.Repositories;
 using Domain.Pagination;
 using Project.Core.Interfaces.IServices;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Project.Core.Services
@@ -31,8 +30,7 @@ namespace Project.Core.Services
         {
             try
             {
-                if (model.ManufactureDate > model.ExpiryDate)
-                    throw new System.Exception("A data de fabricação não pode ser maior que a data de expiração");
+                ValidateDates(model);
 
                 return await _repository.Create(model);
             }
@@ -44,15 +42,24 @@ namespace Project.Core.Services
 
         public async Task Update(Product model)
         {
-            var product = await _repository.GetById(model.Id);
+            try
+            {
+                ValidateDates(model);
 
-            //Manual mapping            
-            product.Description = model.Description;
-            product.IsActive = model.IsActive;
-            product.ManufactureDate = model.ManufactureDate.Value;
-            product.ExpiryDate = model.ExpiryDate.Value;
+                var product = await _repository.GetById(model.Id);
 
-            await _repository.Update(product);
+                //Manual mapping            
+                product.Description = model.Description;
+                product.IsActive = model.IsActive;
+                product.ManufactureDate = model.ManufactureDate.Value;
+                product.ExpiryDate = model.ExpiryDate.Value;
+
+                await _repository.Update(product);
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task Delete(int id)
@@ -60,6 +67,12 @@ namespace Project.Core.Services
             var entity = await _repository.GetById(id);
             entity.IsActive = false;
             await _repository.Update(entity);
+        }
+
+        private static void ValidateDates(Product model)
+        {
+            if (model.ManufactureDate > model.ExpiryDate)
+                throw new System.Exception("A data de fabricação não pode ser maior que a data de expiração");
         }
     }
 }
