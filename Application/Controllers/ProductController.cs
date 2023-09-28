@@ -102,7 +102,7 @@ namespace Project.UI.Controllers
                 {                   
                     var product = _mapper.Map<Product>(model);
                     await _service.Update(product);
-                    return new CreatedAtRouteResult("GetById",
+                    return new CreatedAtRouteResult("GetProductById",
                         new { id = model.Id }, model);
                 }
                 catch (Exception ex)
