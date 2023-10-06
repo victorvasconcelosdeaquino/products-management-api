@@ -20,7 +20,10 @@ namespace Project.UI.Controllers
         private readonly IProductService _service;
         private readonly IMapper _mapper;
 
-        public ProductController(ILogger<ProductController> logger, IProductService service, IMapper mapper)
+        public ProductController(
+            ILogger<ProductController> logger, 
+            IProductService service, 
+            IMapper mapper)
         {
             _logger = logger;
             _service = service;

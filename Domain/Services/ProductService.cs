@@ -18,12 +18,12 @@ namespace Project.Core.Services
 
         public async Task<PaginationList<Product>> GetProducts(Parameters paremeters)
         {
-            return await _repository.GetAllComplete(paremeters);
+            return await _repository.GetAllProducts(paremeters);
         }
 
         public async Task<Product> GetProduct(int id)
         {
-            return await _repository.GetByIdComplete(id);
+            return await _repository.GetProductById(id);
         }
 
         public async Task<Product> Create(Product model)

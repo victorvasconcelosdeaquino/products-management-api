@@ -17,7 +17,7 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<PaginationList<Product>> GetAllComplete(Parameters parameters)
+        public async Task<PaginationList<Product>> GetAllProducts(Parameters parameters)
         {
             var products = await _context.Set<Product>()
                 .Include(c => c.Supplier)
@@ -26,12 +26,12 @@ namespace Infrastructure.Repositories
             return PaginationList<Product>.ToPaginationList(products.AsQueryable(), parameters.PageNumber, parameters.PageSize);
         }
 
-        public async Task<Product> GetByIdComplete(int id)
+        public async Task<Product> GetProductById(int id)
         {
             return await _context.Set<Product>()
                 .Include(c => c.Supplier)
                 .Where(c => c.Id == id)
-                .FirstOrDefaultAsync();
+                .SingleOrDefaultAsync();
         }
     }
 }

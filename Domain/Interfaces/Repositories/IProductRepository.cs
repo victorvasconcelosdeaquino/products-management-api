@@ -6,7 +6,7 @@ namespace Domain.Interfaces.Repositories
 {
     public interface IProductRepository : IBaseRepository<Product>
     {
-        Task<PaginationList<Product>> GetAllComplete(Parameters parameters);
-        Task<Product> GetByIdComplete(int id);
+        Task<PaginationList<Product>> GetAllProducts(Parameters parameters);
+        Task<Product> GetProductById(int id);
     }
 }
