@@ -1,8 +1,10 @@
-﻿using Domain.ViewModels;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Entities;
 using Domain.Entities.DTO;
 using Domain.Interfaces.Services;
+using Domain.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class SupplierController : ControllerBase

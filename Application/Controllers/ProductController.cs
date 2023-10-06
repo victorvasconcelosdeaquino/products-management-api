@@ -1,17 +1,20 @@
-﻿using Domain.ViewModels;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Entities;
 using Domain.Entities.DTO;
+using Domain.Pagination;
+using Domain.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Project.Core.Interfaces.IServices;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Domain.Pagination;
 
 namespace Project.UI.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
