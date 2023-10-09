@@ -20,18 +20,15 @@ namespace Api.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
 
         public AuthorizationController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IMapper mapper,
             IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _mapper = mapper;
             _configuration = configuration;
         }
 
@@ -99,7 +96,7 @@ namespace Api.Controllers
 
             //generates a key based on symmetric algorithm
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_configuration["Jwt:key"]));
+                Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
 
             //generates the user token signature using the algorithm Hmac and the private key
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
