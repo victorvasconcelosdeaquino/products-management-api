@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Controllers
 {
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]

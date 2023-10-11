@@ -5,6 +5,7 @@ using Domain.Pagination;
 using Domain.ViewModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Project.Core.Interfaces.IServices;
@@ -52,8 +53,14 @@ namespace Project.UI.Controllers
 
         }
 
-        // GET: ProductController/
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:int}", Name = "GetProductById")]
+        [ProducesResponseType(typeof(ProductViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             try
@@ -74,8 +81,21 @@ namespace Project.UI.Controllers
             }
         }
 
-        // POST: ProductController/
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// Example:
+        ///     POST api/products
+        ///     {
+        ///         
+        ///     }
+        /// </remarks>
+        /// <param name="model"></param>
+        /// <returns>Product inserted</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PostAsync(ProductDTO model)
         {
             if (ModelState.IsValid)
@@ -100,6 +120,7 @@ namespace Project.UI.Controllers
 
         // Put: ProductController/
         [HttpPut]
+        [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Put))]
         public async Task<IActionResult> PutAsync(ProductDTO model)
         {
             if (ModelState.IsValid)

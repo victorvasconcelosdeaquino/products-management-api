@@ -10,7 +10,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using rental_movie_api.ServiceExtensions;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Application
@@ -26,6 +30,8 @@ namespace Application
                 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddControllers();
             
             services.AddSwaggerGen(c =>
@@ -107,6 +113,8 @@ namespace Application
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseCors(c => c.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

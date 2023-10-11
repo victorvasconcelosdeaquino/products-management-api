@@ -1,5 +1,4 @@
 ﻿using Api.ViewModels;
-using AutoMapper;
 using Domain.Entities.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
